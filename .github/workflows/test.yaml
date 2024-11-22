@@ -1,21 +1,20 @@
 name: Python CI Workflow
 
 env:
-    NODE_VERSION: '16'
-    
+  NODE_VERSION: "16"
 
 # Déclencheur de workflow
 on:
   push:
     branches:
-      - main  # Exécute ce workflow sur les pushes vers la branche principale
+      - main # Exécute ce workflow sur les pushes vers la branche principale
   pull_request:
     branches:
-      - main  # Exécute également ce workflow sur les pull requests vers la branche principale
+      - main # Exécute également ce workflow sur les pull requests vers la branche principale
 
 jobs:
   build_and_test:
-    runs-on: ubuntu-latest  # Utilise l'image Ubuntu sur GitHub Actions
+    runs-on: ubuntu-latest # Utilise l'image Ubuntu sur GitHub Actions
 
     steps:
       # Étape 1 : Checkout du code source
@@ -26,7 +25,7 @@ jobs:
       - name: Set up Python 3.9
         uses: actions/setup-python@v4
         with:
-          python-version: '3.9'  # Utilisation de Python 3.9
+          python-version: "3.9" # Utilisation de Python 3.9
 
       # Étape 3 : Installer les dépendances
       - name: Install dependencies
@@ -34,4 +33,14 @@ jobs:
           python -m pip install --upgrade pip  # Mettre à jour pip
           pip install -r requirements.txt  # Installer les dépendances du fichier requirements.txt
 
-      
+      # Étape 4 : Linter le code avec Flake8
+      - name: Lint with Flake8
+        run: |
+          pip install flake8  # Installer Flake8
+          flake8 .  # Exécuter Flake8 sur tout le projet
+
+      # Étape 5 : Exécuter les tests avec nosetests
+      - name: Run tests with nose
+        run: |
+          pip install nose  # Installer Nose
+          nosetests  # Exécuter les tests avec nose
