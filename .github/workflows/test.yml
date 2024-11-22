@@ -1,5 +1,9 @@
 name: Python CI Workflow
 
+env:
+    NODE_VERSION: '20'
+    
+
 # Déclencheur de workflow
 on:
   push:
