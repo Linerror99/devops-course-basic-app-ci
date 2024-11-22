@@ -1,7 +1,7 @@
 name: Python CI Workflow
 
 env:
-    NODE_VERSION: '20'
+    NODE_VERSION: '16'
     
 
 # Déclencheur de workflow
